@@ -68,6 +68,10 @@ body{
    font-size: 1.8em;
 }
 
+#home>.container>p:first-child{
+	padding: 0 10%;
+}
+
 .space-intro{
    padding: 35px 0 20px;
 }
@@ -104,8 +108,13 @@ body{
    padding-bottom: 100px;
 }
 
-#portfolio,#contact,#home{
+#portfolio,#home{
    padding-top: 6.5em;
+	 padding-bottom: 4.5em;
+}
+
+#contact{
+	padding-top: 8em;
 }
 
 #home,#contact{
@@ -174,7 +183,7 @@ body{
 }
 
 .email{
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 /* ------------------------------------- FADE IN */
