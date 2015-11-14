@@ -65,11 +65,11 @@ body{
 }
 
 #home p,.email{
-   font-size: 1.8em;
+   font-size: 1.6em;
 }
 
 #home>.container>p:first-child{
-	padding: 0 10%;
+	padding: 0 8%;
 }
 
 .space-intro{
