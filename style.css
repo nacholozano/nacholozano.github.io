@@ -1,0 +1,227 @@
+/*icons by flaticon*
+http://www.flaticon.com/free-icon/3d-outlined-shape_51767
+http://www.flaticon.com/free-icon/github-cat-in-a-circle_25231
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+body{
+   font-family: Montserrat;
+}
+
+.header{
+   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.navbar-nav>li>a{
+  color: white !important;
+}
+
+.navbar{
+   margin:0;
+}
+
+.navbar-toggle .icon-bar {
+  width: 30px;
+  height: 4px;
+  background-color: black !important;
+}
+
+.navbar-toggle .icon-bar+.icon-bar {
+  margin-top: 4px ;
+}
+
+.navbar-default .navbar-toggle {
+  border: none;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus
+{
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+
+}
+
+.header,.navbar{
+   background-color: #66bb6a;
+}
+
+.navbar-nav>li{
+   -webkit-transition: background-color 0.5s;
+   -moz-transition: background-color 0.5s;
+   -o-transition: background-color 0.5s;
+   transition: background-color 0.5s;
+}
+
+.navbar-nav>li:hover{
+   background: #43a047;
+}
+
+#home,#contact{
+   background-color: #a5d6a7;
+}
+
+#home p,.email{
+   font-size: 1.8em;
+}
+
+.space-intro{
+   padding: 35px 0 20px;
+}
+
+.arrow-portfolio{
+   -webkit-transition: font-size 0.3s;
+   -moz-transition: font-size 0.3s;
+   -o-transition: font-size 0.3s;
+   transition: font-size 0.3s;
+   text-decoration: none;
+   color: black;
+   font-size: 1.6em;
+}
+
+.arrow-portfolio:hover{
+   text-decoration: none;
+   color: black;
+   font-size: 2.7em;
+}
+
+.arrow-portfolio:link {
+    color: black;
+}
+
+.arrow-portfolio:visited {
+    color: black;
+}
+
+.arrow-portfolio:active {
+    color: black;
+}
+
+#portfolio{
+   padding-bottom: 100px;
+}
+
+#portfolio,#contact,#home{
+   padding-top: 2.5em;
+}
+
+#home,#contact{
+   min-height: 100vh;
+}
+
+#portfolio img{
+   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#portfolio>div{
+   margin-top: 2em;
+}
+
+.project-info{
+   color: white;
+   position: absolute;
+   width: 92%;
+   height: 100%;
+   z-index: 50;
+   bottom: 0;
+   background-color: black;
+   opacity: 0;
+   -webkit-transition: opacity 0.4s;
+   -moz-transition: opacity 0.4s;
+   -o-transition: opacity 0.4s;
+   transition: opacity 0.4s;
+}
+
+.project-info:hover{
+   opacity: 0.8;
+}
+
+.project-info>p:first-child{
+   margin-top: 5%;
+   margin-bottom: 6%;
+   font-size: 1.7em;
+}
+
+.project-info>p{
+   margin-top: 4%;
+}
+
+#contact>h1{
+   margin-bottom: 50px;
+}
+
+#contact img{
+   width: 8em;
+   margin-bottom: 50px;
+   background-color: white;
+   border-radius: 50%;
+   padding: 10px;
+   -webkit-transition: -webkit-transform 0.4s;
+   -moz-transition: -moz-transform 0.4s;
+   -o-transition: -o-transform 0.4s;
+   transition: transform 0.4s;
+}
+
+#contact img:hover{
+    -webkit-transform: rotate(-20deg);
+    -moz-transform: rotate(-20deg);
+    -ms-transform: rotate(-20deg);
+    -o-transform: rotate(-20deg);
+    transform: rotate(-20deg);
+}
+
+.email{
+  margin-bottom: 50px;
+}
+
+/* ------------------------------------- FADE IN */
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation: fadeIn 0.88s infinite;
+  -moz-animation: fadeIn 0.88s infinite;
+  -o-animation: fadeIn 0.88s infinite;
+  animation: fadeIn 0.88s infinite;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -o-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
