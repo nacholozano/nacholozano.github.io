@@ -1,0 +1,137 @@
+/* Compress class */
+.compress-table{
+  width: 100%;
+}
+
+.compress-table>thead{
+  display: none;
+}
+
+/* Inspired by Geoff Yuen http://codepen.io/geoffyuen/pen/FCBEg */
+.compress-table td::before{
+  content: attr(data-header)' ';
+}
+
+.compress-table td:hover{
+  background-color: white;
+}
+
+.compress-table tr{
+  border-bottom: 2px solid black;
+}
+
+.compress-table td{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+/* Some style */
+
+h1{
+  margin-top: 4rem;
+}
+
+article{
+  margin-top: 8rem;
+}
+
+article:last-of-type{
+  margin-bottom: 7rem;
+}
+
+h2{
+  margin-top: 5rem;
+}
+
+.responsive-table{
+    margin: 0 auto;
+}
+
+.responsive-table th,td{
+    padding: 1em 2em;
+/*     white-space: nowrap; */ /* use this if you don't want spli lines */
+}
+
+.guy img{
+   width: 100%;
+   display: none;
+}
+
+section.effect h2,.types h3{
+  margin-bottom: 5rem;
+}
+
+table.effect{
+  margin-top: 3rem;
+  border: 2px solid black;
+}
+
+table.effect:last-of-type{
+  margin-bottom: 6rem;
+}
+
+footer{
+  padding: 4rem;
+}
+
+footer img{
+  width: 10rem;
+}
+
+@media screen and (max-width: 768px) {
+
+  footer{
+    text-align: center;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+
+.guy img{
+    display: block;
+  }
+
+}
+  
+/* Table 1 */
+
+.table-1 .responsive-table,.table-1 .table-parent{
+  background-color: rgba(255, 0, 0, 0.28);
+}
+
+/* Table 2 */
+
+.table-2 .responsive-table,.table-2 .table-parent{
+  background-color: rgba(0, 128, 0, 0.28);
+}
+
+/* Table 3 */
+
+.table-3 .table-parent{
+  padding: 0 3em;
+}
+
+.table-3 .responsive-table, .table-3 .table-parent{
+  background-color: rgba(0, 0, 255, 0.28);
+}
+
+/* Table 4 */
+
+.table-4 .responsive-table,.table-4 .table-parent {
+  background-color: rgba(255, 255, 0, 0.28);
+}
+
+/* Table x */
+
+.table-2 .responsive-table,.table-3 .responsive-table {
+  width: 100%;
+}
+
+
