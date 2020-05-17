@@ -1,0 +1,23 @@
+{
+  "name": "nacholozano.github.io",
+  "version": "1.0.0",
+  "description": "CV",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nacholozano/nacholozano.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nacholozano/nacholozano.github.io/issues"
+  },
+  "homepage": "https://github.com/nacholozano/nacholozano.github.io#readme",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}

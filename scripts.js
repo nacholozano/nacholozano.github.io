@@ -1,74 +1,102 @@
 /* var path = document.querySelector('.path');
 var length = path.getTotalLength(); */
+import { buildJobs, avatarThatFollowPath, getContinue } from './functions.js';
+
+const jobsConfig = [
+  {
+    company: {
+      name: 'AUGE Digital',
+      color: 'green'
+    },
+    initDate: '01/2016',
+    endDate: '11/2017',
+    profile: 'Junior App Developer',
+    skills: [
+      {
+        code: 'angular-js',
+        logo: 'assets/',
+        expertise: 7 // 1 - 10
+      }
+    ]
+  },
+  {
+    company: {
+      name: 'Oficina Cooperación Universitaria',
+      color: 'blue'
+    },
+    profile: 'Mid Front-End Developer',
+    initDate: '01/2016',
+    endDate: '11/2017',
+  },
+  /* {
+    company: {
+      name: 'Profile Software Services',
+      color: 'red'
+    },
+    profile: 'Senior Front-End Developer',
+    initDate: '01/2016',
+    endDate: '',
+  } */
+];
+
+/* const scrollStep = 1;
+let currentScroll = 0;
+let maxScroll = 0; */
 
 const initHeight = 10;
 const jobHeight = 65;
-const jobDuration = 8;
+const jobDuration = 5;
+const currentJobPath = `
+  v 30
+  h 20 
+  q 0,-20 20,-20 
+  h 160 
+  q 20,0 20,20 
+  v 5
+`
 const jobPath = `
-    v 30 
-    h 20 
-    q 0,-20 20,-20 
-    h 160 
-    q 20,0 20,20 
-    v 5 
-    q 0,20 -20,20 
-    h -160 
-    q -20,0 -20,-20 
-    h -20 v30
+  ${currentJobPath} 
+  q 0,20 -20,20 
+  h -160 
+  q -20,0 -20,-20 
+  h -20 v30
 `;
+
+/* window.scrollTo(0, 0); */
 
 const id = document.getElementById('svg');
 
-const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-svg.setAttribute('viewBox', '0 0 300 1000');
+const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svg.setAttribute('viewBox', `0 0 300 ${(jobHeight * jobsConfig.length) + 70}`);
 
-console.log(svg);
+const jobs = buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobHeight, initHeight);
+const avatar = avatarThatFollowPath(jobsConfig, jobDuration, currentJobPath, jobPath, initHeight);
 
-const path1 = jobCreator(initHeight);
-const path2 = jobCreator(initHeight + jobHeight);
+jobs.forEach(job => {
+  svg.appendChild(job);
+});
+svg.appendChild(avatar);
+svg.appendChild(getContinue(jobsConfig.length, jobDuration));
 
-path2.style.animationDelay = jobDuration + 's';
+const start = document.getElementById('startCV');
+const intro = document.getElementById('intro');
 
-console.log(path1);
-console.log(path2);
+start.addEventListener('click', function startFn(e) {
+  e.target.removeEventListener('click', startFn);
+  // start.classList.add('rotate');
+  intro.classList.add('hide-intro');
+  id.appendChild(svg);
+});
 
-svg.appendChild(path1);
-svg.appendChild(path2);
-svg.appendChild(path2);
-svg.appendChild(avatarThatFollowPath());
+/* setTimeout(() => {
+  maxScroll = document.body.scrollHeight;
+  // window.requestAnimationFrame(step);
+}, jobDuration * 1000) */
 
-id.appendChild(svg);
-
-function createSvgEl(type = '') {
-    return document.createElementNS('http://www.w3.org/2000/svg', type)
-}
-
-function jobCreator(vPos = 0) {
-    const p = createSvgEl("path");
-    p.setAttribute('d', `
-        M 35 ${vPos} 
-        ${jobPath}
-    `)
-    return p;
-}
-
-function avatarThatFollowPath() {
-    const avatar = createSvgEl('circle');
-    avatar.setAttribute('r', 5);
-    avatar.setAttribute('fill', 'red');
-
-    const animateMotion = createSvgEl('animateMotion');
-    animateMotion.setAttribute('repeatCount', 'indefinite');
-    animateMotion.setAttribute('dur', `${jobDuration * 2}s`);
-    animateMotion.setAttribute('path', `
-        M 35 ${initHeight}
-        ${jobPath}
-        ${jobPath}
-    `);
-    animateMotion.setAttribute('fill', 'freeze');
-    animateMotion.setAttribute('end', `${jobDuration * 2}s`);
-
-    avatar.appendChild(animateMotion);
-
-    return avatar;
-}
+/* function step() {
+  currentScroll += scrollStep;
+  window.scrollTo(0, currentScroll);
+  if (currentScroll < maxScroll) {
+    window.requestAnimationFrame(step);
+  }
+} */

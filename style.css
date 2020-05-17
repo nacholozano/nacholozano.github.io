@@ -1,6 +1,72 @@
 
 body {
    margin: 0;
+   font-family: Arial;
+}
+
+.hide-intro {
+   animation-name: translateY;
+   animation-duration: .8s;
+   animation-fill-mode: forwards;
+   animation-timing-function: linear;
+   /* animation-delay: 1s; */
+}
+
+.rotate {
+   animation-name: rotate;
+   animation-duration: 0.8s;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+   from {
+      transform: rotate(0);
+   }
+   to {
+      transform: rotate(360deg);
+   }
+}
+
+@keyframes translateY {
+   from {
+      transform: translateY(0);
+   }
+   to {
+      transform: translateY(-100vh);
+   }
+}
+
+#intro {
+   position: absolute;
+   background-color: aquamarine;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+#startCV { 
+   background-color: transparent;
+   border: 4px solid white;
+   border-radius: 0.7em;
+   padding: 1em;
+   font-size: 3em;
+   color: white;
+   font-weight: bold;
+   letter-spacing: 0.1em;
+   outline: none;
+}
+
+#startCV:hover {
+   cursor: pointer;
+}
+
+#svg {
+   overflow-y: scroll;
+   height: 100vh;
 }
 
 path {
@@ -10,7 +76,7 @@ path {
    stroke-dasharray: 555;
    stroke-dashoffset: 555;
 
-   animation-duration: 8s;
+   /* animation-duration: 11s; */
    animation-name: dash;
    animation-fill-mode: forwards;
    animation-timing-function: linear;
@@ -23,4 +89,52 @@ path {
    to {
       stroke-dashoffset: 0;
    }
+}
+
+.avatar-profile-name {
+   font-size: 0.3em;
+}
+
+.opacity, 
+.opacity-end,
+.opacity-full {
+   opacity: 0;
+   /* animation-duration: 8s; */
+   animation-name: opacity;
+   animation-fill-mode: forwards;
+   animation-timing-function: linear;
+}
+
+.opacity {
+   animation-name: opacity;
+}
+
+.opacity-end {
+   animation-name: opacityEnd;
+}
+
+.opacity-full {
+   animation-name: opacityFull;
+}
+
+@keyframes opacity {
+   0% { opacity: 0 }
+  5% { opacity: 1 }
+  95% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+@keyframes opacityEnd {
+   0% { opacity: 0 }
+  5% { opacity: 1 }
+  100% { opacity: 1 }
+}
+
+@keyframes opacityFull {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+.jobInfo {
+   font-size: 0.3em;
 }
