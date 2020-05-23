@@ -14,19 +14,36 @@ const jobsConfig = [
     skills: [
       {
         code: 'angular-js',
-        logo: 'assets/',
+        logo: 'assets/angular.svg',
         expertise: 7 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 2 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 5 // 1 - 10
       }
     ]
   },
   {
     company: {
-      name: 'Oficina Cooperación Universitaria',
+      name: 'Universitas XXI',
       color: 'blue'
     },
     profile: 'Mid Front-End Developer',
     initDate: '01/2016',
     endDate: '11/2017',
+    skills: [
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
+      }
+    ]
   },
   {
     company: {
@@ -36,6 +53,7 @@ const jobsConfig = [
     profile: 'Senior Front-End Developer',
     initDate: '01/2016',
     endDate: '',
+    skills: []
   }
 ];
 

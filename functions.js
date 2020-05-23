@@ -50,10 +50,12 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     jobInfo.appendChild(endDate);
 
     g.appendChild(jobInfo);
-
     g.appendChild(p);
-        
     g.style.transform = `translateY(${translateY * i}${unitTranslateY})`;
+
+    const skills = getJobSkills(jobConfig.skills);
+    console.log(skills);
+    g.appendChild(skills);
 
     return g;
   })
@@ -114,4 +116,43 @@ export function getContinue(jobsConfig, jobDuration) {
   willContinue.style.transform = `translate(5.1vw, ${(jobHeight * jobsConfig.length) + jobHeightUnit})`;
   willContinue.classList.add('opacity-full');
   return willContinue;
+}
+
+function getJobSkills(skills) {
+  const sortedSkills = skills.sort((a, b) => {
+    return b.expertise - a.expertise;
+  });
+
+  /* const containerWidth = 12.5;
+  const containerHeight = 2.8;
+  const unit = 'em';
+
+  const supNumber = Math.ceil(sortedSkills.length / 2);
+
+  const sup = sortedSkills.slice(0, supNumber);
+  const sub = sortedSkills.slice(supNumber, sortedSkills.length);
+  const numRows = sub.length ? 2 : 1;
+
+  console.log(sup, sub, numRows);
+  
+  const supStep = containerWidth / 2;
+  const supArray = sup.map((item, i, array) => {
+    return 
+  }); */
+
+  const gContainer = createSvgEl('g');
+  sortedSkills.forEach((skill, i) => {
+    const logo = createSvgEl('image');
+    logo.setAttribute('href', skill.logo);
+    logo.setAttribute('width', 1);
+    logo.setAttribute('height', 1);
+    logo.style.transformBox = 'fill-box';
+    logo.style.transformOrigin = 'center';
+
+    gContainer.appendChild(logo);
+  });
+
+  gContainer.style.transform = 'translate(3.4em, 0.6em)';
+
+  return gContainer;
 }
