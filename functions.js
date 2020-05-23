@@ -123,7 +123,7 @@ function getJobSkills(skills) {
     return b.expertise - a.expertise;
   });
 
-  /* const containerWidth = 12.5;
+  const containerWidth = 12.5;
   const containerHeight = 2.8;
   const unit = 'em';
 
@@ -133,21 +133,38 @@ function getJobSkills(skills) {
   const sub = sortedSkills.slice(supNumber, sortedSkills.length);
   const numRows = sub.length ? 2 : 1;
 
-  console.log(sup, sub, numRows);
+  /* console.log(sup, sub, numRows); */
   
-  const supStep = containerWidth / 2;
-  const supArray = sup.map((item, i, array) => {
-    return 
-  }); */
-
   const gContainer = createSvgEl('g');
-  sortedSkills.forEach((skill, i) => {
+
+  const step = containerWidth / sup.length;
+  const initStep = step / 2;
+
+  const stepSub = containerWidth / sub.length;
+  const initStepSub = stepSub / 2;
+
+  const cellHeight = sup.length && sub.length ? containerHeight / 2 : containerHeight;
+  
+  sup.forEach((skill, i) => {
     const logo = createSvgEl('image');
     logo.setAttribute('href', skill.logo);
     logo.setAttribute('width', 1);
     logo.setAttribute('height', 1);
     logo.style.transformBox = 'fill-box';
     logo.style.transformOrigin = 'center';
+    logo.style.transform = `translate(${initStep + (i * step)}${unit}, ${cellHeight/2}${unit}) scale(${1})`;
+
+    gContainer.appendChild(logo);
+  });
+
+  sub.forEach((skill, i) => {
+    const logo = createSvgEl('image');
+    logo.setAttribute('href', skill.logo);
+    logo.setAttribute('width', 1);
+    logo.setAttribute('height', 1);
+    logo.style.transformBox = 'fill-box';
+    logo.style.transformOrigin = 'center';
+    logo.style.transform = `translate(${initStepSub + (i * stepSub)}${unit}, ${( cellHeight / 2 ) + containerHeight / 2}${unit}) scale(${1})`;
 
     gContainer.appendChild(logo);
   });
