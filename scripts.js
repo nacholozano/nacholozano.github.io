@@ -28,7 +28,7 @@ const jobsConfig = [
     initDate: '01/2016',
     endDate: '11/2017',
   },
-  /* {
+  {
     company: {
       name: 'Profile Software Services',
       color: 'red'
@@ -36,14 +36,14 @@ const jobsConfig = [
     profile: 'Senior Front-End Developer',
     initDate: '01/2016',
     endDate: '',
-  } */
+  }
 ];
 
 /* const scrollStep = 1;
 let currentScroll = 0;
 let maxScroll = 0; */
 
-const initHeight = 10;
+const initHeight = 0;
 const jobHeight = 65;
 const jobDuration = 5;
 const currentJobPath = `
@@ -76,7 +76,7 @@ jobs.forEach(job => {
   svg.appendChild(job);
 });
 svg.appendChild(avatar);
-svg.appendChild(getContinue(jobsConfig.length, jobDuration));
+svg.appendChild(getContinue(jobsConfig, jobDuration));
 
 const start = document.getElementById('startCV');
 const intro = document.getElementById('intro');

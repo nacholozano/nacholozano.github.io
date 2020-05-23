@@ -7,22 +7,26 @@ export function createSvgEl(type = '') {
 }
 
 export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobHeight, initHeight) {
+
+  const translateY = 4.06;
+  const unitTranslateY = 'em';
+
   return jobsConfig.map((jobConfig, i) => {
 
     const g = createSvgEl('g')
     const p = createSvgEl('path');
     p.setAttribute('d', `
       M 35 
-      ${initHeight + (jobHeight * i)} 
+      ${initHeight}
       ${(i === jobsConfig.length - 1) && !jobsConfig[jobsConfig.length - 1].endDate
           ? currentJobPath 
           : jobPath}
     `)
-    
+      
+    p.style.stroke = jobConfig.company.color;
     p.style.animationDuration = `${jobDuration}s`;
     p.style.animationDelay = (jobDuration * i) + 's';
 
-    /* const gDesc = createSvgEl('g'); */
     const jobInfo = createSvgEl('text');
     jobInfo.classList.add('jobInfo');
 
@@ -37,7 +41,7 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     company.setAttribute('x', "0.2em");
 
     const endDate = createSvgEl('tspan');
-    endDate.textContent = jobConfig.endDate;
+    endDate.textContent = jobConfig.endDate || 'Now';
     endDate.setAttribute('dy', "1.2em");
     endDate.setAttribute('x', "0.2em");
 
@@ -48,6 +52,8 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     g.appendChild(jobInfo);
 
     g.appendChild(p);
+        
+    g.style.transform = `translateY(${translateY * i}${unitTranslateY})`;
 
     return g;
   })
@@ -57,7 +63,7 @@ export function avatarThatFollowPath(jobsConfig, jobDuration, currentJobPath, jo
   const g = createSvgEl('g');
   const avatar = createSvgEl('circle');
   avatar.setAttribute('r', 5);
-  avatar.setAttribute('fill', 'red');
+  avatar.setAttribute('fill', 'black');
   
   const totalDuration = jobDuration * jobsConfig.length;
 
@@ -93,14 +99,19 @@ export function avatarThatFollowPath(jobsConfig, jobDuration, currentJobPath, jo
   return g;
 }
 
-export function getContinue(numberOfJobs, jobDuration) {
+export function getContinue(jobsConfig, jobDuration) {
+  const jobHeight = 9.6;
+  const jobHeightUnit = 'em';
+  const animationDelayOffset = 0.5;
+  const lastJobIsCurrent = !jobsConfig[jobsConfig.length - 1].endDate;
+  const animationDelay = jobDuration * jobsConfig.length + animationDelayOffset;
+
   const willContinue = createSvgEl('text');
   willContinue.textContent = 'will continue ... with your project?';
-  willContinue.setAttribute('x', 90);
-  willContinue.setAttribute('y', 65 * numberOfJobs + 40);
   willContinue.style.fontSize = '0.5em';
-  willContinue.style.animationDelay = `${jobDuration * numberOfJobs}s`;
-  willContinue.style.animationDuration = '6s';
+  willContinue.style.animationDelay = `${lastJobIsCurrent ? (animationDelay - jobDuration / 2) : animationDelay}s`;
+  willContinue.style.animationDuration = '4s';
+  willContinue.style.transform = `translate(5.1vw, ${(jobHeight * jobsConfig.length) + jobHeightUnit})`;
   willContinue.classList.add('opacity-full');
   return willContinue;
 }
