@@ -54,7 +54,7 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     g.style.transform = `translateY(${translateY * i}${unitTranslateY})`;
 
     const skills = getJobSkills(jobConfig.skills, jobDuration);
-    console.log(skills);
+    
     g.appendChild(skills);
 
     return g;
@@ -148,46 +148,44 @@ function getJobSkills(skills, jobDuration) {
 
   const cellHeight = sup.length && sub.length ? containerHeight / 2 : containerHeight;
   
-  /* function setJobSkillProps() {
-    return (skill, i) => {
+  sup
+    .map( setJobSkillProps((i) => ({
+        x: (initStep + (i * step)) + unit,
+        y: (cellHeight / 2) + unit
+      })
+    ))
+    .forEach(jobSkill => gContainer.appendChild(jobSkill))
 
-    }
-  } */
+  sub
+    .map( setJobSkillProps((i) => ({
+        x: initStepSub + (i * stepSub) + unit,
+        y: (( cellHeight / 2 ) + containerHeight / 2) + unit
+      })
+    ))
+    .forEach(jobSkill => gContainer.appendChild(jobSkill))
 
-  sup.forEach((skill, i) => {
+  gContainer.style.transform = 'translate(3.4em, 0.6em)';
+
+  return gContainer;
+}
+
+function setJobSkillProps(translate = () => {}) {
+  return (skill, i) => {
     const gLogo = createSvgEl('g');
     const logo = createSvgEl('image');
     logo.setAttribute('href', skill.logo);
     logo.setAttribute('width', 1);
     logo.setAttribute('height', 1);
     logo.classList.add('scale-skill');
-
-    logo.style.transformBox = 'fill-box';
-    logo.style.transformOrigin = 'center';
     
     logo.style.animationName = `scale-skill-${skill.expertise}`;
     logo.style.animationDuration = `${4 /* durationPerExpertise */}s`;
     // logo.style.animationDelay = `${i * durationPerExpertise}s`;
-
-    gLogo.style.transform = `translate(${initStep + (i * step)}${unit}, ${cellHeight/2}${unit})`;
+    const trans = translate(i);
+    gLogo.style.transform = `translate(${trans.x}, ${trans.y})`;
 
     gLogo.appendChild(logo);
-    gContainer.appendChild(gLogo);
-  });
-
-  sub.forEach((skill, i) => {
-    const logo = createSvgEl('image');
-    logo.setAttribute('href', skill.logo);
-    logo.setAttribute('width', 1);
-    logo.setAttribute('height', 1);
-    logo.style.transformBox = 'fill-box';
-    logo.style.transformOrigin = 'center';
-    logo.style.transform = `translate(${initStepSub + (i * stepSub)}${unit}, ${( cellHeight / 2 ) + containerHeight / 2}${unit}) scale(${1})`;
-
-    gContainer.appendChild(logo);
-  });
-
-  gContainer.style.transform = 'translate(3.4em, 0.6em)';
-
-  return gContainer;
+    // gContainer.appendChild(gLogo);
+    return gLogo;
+  }
 }
