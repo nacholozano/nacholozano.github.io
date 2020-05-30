@@ -2,6 +2,8 @@
 var length = path.getTotalLength(); */
 import { buildJobs, avatarThatFollowPath, getContinue } from './functions.js';
 
+const durationPerExpertise = 1; // seconds
+
 const jobsConfig = [
   {
     company: {
@@ -92,6 +94,12 @@ const jobsConfig = [
     ]
   }
 ];
+
+jobsConfig.forEach(job => {
+  job.duration = durationPerExpertise * (job.skills.map(skill => skill.expertise).reduce((ac, currentValue) => ac + currentValue));
+});
+
+console.log(jobsConfig);
 
 /* const scrollStep = 1;
 let currentScroll = 0;
