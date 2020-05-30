@@ -73,8 +73,8 @@ body {
 }
 
 #svg {
-   overflow-y: scroll;
-   height: 100vh;
+   /* overflow-y: scroll;
+   height: 100vh; */
 }
 
 path {
@@ -145,4 +145,68 @@ path {
 
 .jobInfo {
    font-size: 0.3em;
+}
+
+/* .scale-skill {
+   animation-name: opacityFull;
+} */
+
+.scale-skill {
+   transform: scale(0);
+   animation-fill-mode: forwards;
+   animation-timing-function: linear;
+   transition-duration: 4s;
+   transition-delay: 2s;
+}
+
+/* Skill expertise animations */
+@keyframes scale-skill-1 {
+   to {
+      transform: scale(1);
+   }
+}
+@keyframes scale-skill-2 {
+   to {
+      transform: scale(2);
+   }
+}
+@keyframes scale-skill-3 {
+   to {
+      transform: scale(3);
+   }
+}
+@keyframes scale-skill-4 {
+   to {
+      transform: scale(4);
+   }
+}
+@keyframes scale-skill-5 {
+   to {
+      transform: scale(5);
+   }
+}
+@keyframes scale-skill-6 {
+   to {
+      transform: scale(6);
+   }
+}
+@keyframes scale-skill-7 {
+   to {
+      transform: scale(7);
+   }
+}
+@keyframes scale-skill-8 {
+   to {
+      transform: scale(8);
+   }
+}
+@keyframes scale-skill-9 {
+   to {
+      transform: scale(9);
+   }
+}
+@keyframes scale-skill-10 {
+   to {
+      transform: scale(10);
+   }
 }

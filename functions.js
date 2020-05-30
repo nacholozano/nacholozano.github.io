@@ -53,7 +53,7 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     g.appendChild(p);
     g.style.transform = `translateY(${translateY * i}${unitTranslateY})`;
 
-    const skills = getJobSkills(jobConfig.skills);
+    const skills = getJobSkills(jobConfig.skills, jobDuration);
     console.log(skills);
     g.appendChild(skills);
 
@@ -118,10 +118,13 @@ export function getContinue(jobsConfig, jobDuration) {
   return willContinue;
 }
 
-function getJobSkills(skills) {
+function getJobSkills(skills, jobDuration) {
   const sortedSkills = skills.sort((a, b) => {
     return b.expertise - a.expertise;
   });
+
+  const totalSkills = skills.map(s => s.expertise).reduce((a,s) => a + s);
+  const durationPerExpertise = jobDuration / totalSkills;
 
   const containerWidth = 12.5;
   const containerHeight = 2.8;
@@ -131,30 +134,45 @@ function getJobSkills(skills) {
 
   const sup = sortedSkills.slice(0, supNumber);
   const sub = sortedSkills.slice(supNumber, sortedSkills.length);
-  const numRows = sub.length ? 2 : 1;
-
-  /* console.log(sup, sub, numRows); */
   
   const gContainer = createSvgEl('g');
 
-  const step = containerWidth / sup.length;
-  const initStep = step / 2;
+  const skillsContainerWidthOffset = 0.9;
+  const skillsOffset = 0.05;
 
-  const stepSub = containerWidth / sub.length;
-  const initStepSub = stepSub / 2;
+  const step = (containerWidth * skillsContainerWidthOffset) / sup.length;
+  const initStep = (step / 2) + (containerWidth * skillsOffset);
+
+  const stepSub = (containerWidth * skillsContainerWidthOffset) / sub.length;
+  const initStepSub = (stepSub / 2) + (containerWidth * skillsOffset);
 
   const cellHeight = sup.length && sub.length ? containerHeight / 2 : containerHeight;
   
+  /* function setJobSkillProps() {
+    return (skill, i) => {
+
+    }
+  } */
+
   sup.forEach((skill, i) => {
+    const gLogo = createSvgEl('g');
     const logo = createSvgEl('image');
     logo.setAttribute('href', skill.logo);
     logo.setAttribute('width', 1);
     logo.setAttribute('height', 1);
+    logo.classList.add('scale-skill');
+
     logo.style.transformBox = 'fill-box';
     logo.style.transformOrigin = 'center';
-    logo.style.transform = `translate(${initStep + (i * step)}${unit}, ${cellHeight/2}${unit}) scale(${1})`;
+    
+    logo.style.animationName = `scale-skill-${skill.expertise}`;
+    logo.style.animationDuration = `${4 /* durationPerExpertise */}s`;
+    // logo.style.animationDelay = `${i * durationPerExpertise}s`;
 
-    gContainer.appendChild(logo);
+    gLogo.style.transform = `translate(${initStep + (i * step)}${unit}, ${cellHeight/2}${unit})`;
+
+    gLogo.appendChild(logo);
+    gContainer.appendChild(gLogo);
   });
 
   sub.forEach((skill, i) => {

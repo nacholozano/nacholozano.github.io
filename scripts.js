@@ -10,7 +10,7 @@ const jobsConfig = [
     },
     initDate: '01/2016',
     endDate: '11/2017',
-    profile: 'Junior App Developer',
+    profile: 'Junior Web Developer',
     skills: [
       {
         code: 'angular-js',
@@ -42,6 +42,36 @@ const jobsConfig = [
         code: 'angular-js',
         logo: 'assets/angular.svg',
         expertise: 7 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
       }
     ]
   },
@@ -53,7 +83,13 @@ const jobsConfig = [
     profile: 'Senior Front-End Developer',
     initDate: '01/2016',
     endDate: '',
-    skills: []
+    skills: [
+      {
+        code: 'angular-js',
+        logo: 'assets/angular.svg',
+        expertise: 7 // 1 - 10
+      }
+    ]
   }
 ];
 
