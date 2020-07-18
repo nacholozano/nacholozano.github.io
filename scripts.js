@@ -2,10 +2,11 @@
 var length = path.getTotalLength(); */
 import { buildJobs, avatarThatFollowPath, getContinue } from './functions.js';
 
-const durationPerExpertise = 1; // seconds
+// const durationPerExpertise = 1; // seconds
+const durationPerExpertise = 0.5; // seconds
 
 const jobsConfig = [
-  {
+  /* {
     company: {
       name: 'AUGE Digital',
       color: 'green'
@@ -30,7 +31,7 @@ const jobsConfig = [
         expertise: 5 // 1 - 10
       }
     ]
-  },
+  }, */
   {
     company: {
       name: 'Universitas XXI',
@@ -43,7 +44,12 @@ const jobsConfig = [
       {
         code: 'angular-js',
         logo: 'assets/angular.svg',
-        expertise: 7 // 1 - 10
+        expertise: 6 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/typescript.png',
+        expertise: 6 // 1 - 10
       },
       {
         code: 'angular-js',
@@ -53,6 +59,11 @@ const jobsConfig = [
       {
         code: 'angular-js',
         logo: 'assets/angular.svg',
+        expertise: 5 // 1 - 10
+      },
+      {
+        code: 'angular-js',
+        logo: 'assets/typescript.png',
         expertise: 7 // 1 - 10
       },
       {
@@ -62,22 +73,12 @@ const jobsConfig = [
       },
       {
         code: 'angular-js',
-        logo: 'assets/angular.svg',
-        expertise: 7 // 1 - 10
-      },
-      {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
-        expertise: 7 // 1 - 10
-      },
-      {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
-        expertise: 7 // 1 - 10
+        logo: 'assets/typescript.png',
+        expertise: 2 // 1 - 10
       }
     ]
   },
-  {
+  /* {
     company: {
       name: 'Profile Software Services',
       color: 'red'
@@ -92,11 +93,28 @@ const jobsConfig = [
         expertise: 7 // 1 - 10
       }
     ]
-  }
+  } */
 ];
 
-jobsConfig.forEach(job => {
+jobsConfig.forEach((job, i, array) => {
   job.duration = durationPerExpertise * (job.skills.map(skill => skill.expertise).reduce((ac, currentValue) => ac + currentValue));
+
+  const slicedArray = array
+    .slice(0, i);
+
+  job.animationDelay = slicedArray.length 
+    ? slicedArray
+      .map(jobConfig => jobConfig.duration)
+      .reduce((ac, currentValue) => ac + currentValue)
+    : 0;
+
+  /* const jobDelay = i ? array[i - 1].duration : 0; */
+
+  job.skills.forEach((skill, iSkills, arraySkills) => {
+    skill.duration = skill.expertise * durationPerExpertise;
+    skill.animationDelay = (iSkills ? 0 : job.animationDelay) + (iSkills ? (arraySkills[iSkills - 1].duration + arraySkills[iSkills - 1].animationDelay ) : 0);
+  })
+
 });
 
 console.log(jobsConfig);
@@ -108,6 +126,9 @@ let maxScroll = 0; */
 const initHeight = 0;
 const jobHeight = 65;
 const jobDuration = 5;
+
+const totalJobDuration = jobsConfig.map(job => job.duration).reduce((ac, currentValue) => ac + currentValue);
+
 const currentJobPath = `
   v 30
   h 20 
@@ -132,13 +153,13 @@ const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svg.setAttribute('viewBox', `0 0 300 ${(jobHeight * jobsConfig.length) + 70}`);
 
 const jobs = buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobHeight, initHeight);
-const avatar = avatarThatFollowPath(jobsConfig, jobDuration, currentJobPath, jobPath, initHeight);
+// const avatar = avatarThatFollowPath(jobsConfig, jobDuration, currentJobPath, jobPath, initHeight);
 
 jobs.forEach(job => {
   svg.appendChild(job);
 });
-svg.appendChild(avatar);
-svg.appendChild(getContinue(jobsConfig, jobDuration));
+// svg.appendChild(avatar);
+svg.appendChild(getContinue(jobsConfig, totalJobDuration));
 
 const start = document.getElementById('startCV');
 const intro = document.getElementById('intro');

@@ -1,6 +1,6 @@
-export function lastIsCurrentJob(jobsConfig) {
+/* export function lastIsCurrentJob(jobsConfig) {
   return jobsConfig[jobsConfig.length - 1].endDate ? false : true;
-}
+} */
 
 export function createSvgEl(type = '') {
   return document.createElementNS('http://www.w3.org/2000/svg', type)
@@ -24,8 +24,9 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     `)
       
     p.style.stroke = jobConfig.company.color;
-    p.style.animationDuration = `${jobDuration}s`;
-    p.style.animationDelay = (jobDuration * i) + 's';
+    p.style.animationDuration = `${jobConfig.duration}s`;
+
+    p.style.animationDelay = (jobConfig.animationDelay) + 's';
 
     const jobInfo = createSvgEl('text');
     jobInfo.classList.add('jobInfo');
@@ -53,7 +54,8 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     g.appendChild(p);
     g.style.transform = `translateY(${translateY * i}${unitTranslateY})`;
 
-    const skills = getJobSkills(jobConfig.skills, jobDuration);
+    /* const skills = getJobSkills(jobConfig.skills, jobDuration); */
+    const skills = getJobSkills(jobConfig, jobDuration);
     
     g.appendChild(skills);
 
@@ -118,13 +120,13 @@ export function getContinue(jobsConfig, jobDuration) {
   return willContinue;
 }
 
-function getJobSkills(skills, jobDuration) {
-  const sortedSkills = skills.sort((a, b) => {
+function getJobSkills(job, jobDuration) {
+  const sortedSkills = job.skills/* .sort((a, b) => {
     return b.expertise - a.expertise;
-  });
+  }) */;
 
-  const totalSkills = skills.map(s => s.expertise).reduce((a,s) => a + s);
-  const durationPerExpertise = jobDuration / totalSkills;
+  // const totalSkills = skills.map(s => s.expertise).reduce((a,s) => a + s);
+  // const durationPerExpertise = jobDuration / totalSkills;
 
   const containerWidth = 12.5;
   const containerHeight = 2.8;
@@ -148,19 +150,24 @@ function getJobSkills(skills, jobDuration) {
 
   const cellHeight = sup.length && sub.length ? containerHeight / 2 : containerHeight;
   
+  const isCurrentJob = !job.endDate;
+
   sup
     .map( setJobSkillProps((i) => ({
         x: (initStep + (i * step)) + unit,
         y: (cellHeight / 2) + unit
-      })
+      }), isCurrentJob
     ))
     .forEach(jobSkill => gContainer.appendChild(jobSkill))
 
+  
+
   sub
+    .reverse()
     .map( setJobSkillProps((i) => ({
         x: initStepSub + (i * stepSub) + unit,
         y: (( cellHeight / 2 ) + containerHeight / 2) + unit
-      })
+      }), isCurrentJob
     ))
     .forEach(jobSkill => gContainer.appendChild(jobSkill))
 
@@ -169,7 +176,7 @@ function getJobSkills(skills, jobDuration) {
   return gContainer;
 }
 
-function setJobSkillProps(translate = () => {}) {
+function setJobSkillProps(translate = () => {}, isCurrentJob) {
   return (skill, i) => {
     const gLogo = createSvgEl('g');
     const logo = createSvgEl('image');
@@ -179,8 +186,10 @@ function setJobSkillProps(translate = () => {}) {
     logo.classList.add('scale-skill');
     
     logo.style.animationName = `scale-skill-${skill.expertise}`;
-    logo.style.animationDuration = `${4 /* durationPerExpertise */}s`;
-    // logo.style.animationDelay = `${i * durationPerExpertise}s`;
+    
+    logo.style.animationDuration = (isCurrentJob ? (skill.duration / 2) : skill.duration) + 's';
+    logo.style.animationDelay = skill.animationDelay + 's';
+
     const trans = translate(i);
     gLogo.style.transform = `translate(${trans.x}, ${trans.y})`;
 
