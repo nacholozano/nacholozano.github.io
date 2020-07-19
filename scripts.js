@@ -2,11 +2,27 @@
 var length = path.getTotalLength(); */
 import { buildJobs, avatarThatFollowPath, getContinue } from './functions.js';
 
+const logoMap = {
+  angular: { logo: 'assets/angular.png', tooltip: 'Angular' },
+  angularjs: { logo: 'assets/angularjs.svg', tooltip: 'Angular JS' },
+  typescript: { logo: 'assets/typescript.png', tooltip: 'Typescript' },
+  rxjs: { logo: 'assets/rxjs.png', tooltip: 'RxJS' },
+  html: { logo: 'assets/html5.png', tooltip: 'HTML 5' },
+  css: { logo: 'assets/css3.png', tooltip: 'CSS 3' },
+  sass: { logo: 'assets/sass.png', tooltip: 'SASS' },
+  js: { logo: 'assets/js.svg', tooltip: 'JavaScript' },
+  redux: { logo: 'assets/redux.png', tooltip: 'Redux' },
+  react: { logo: 'assets/react.svg', tooltip: 'React' },
+  d3: { logo: 'assets/d3.png', tooltip: 'D3' },
+  git: { logo: 'assets/git.png', tooltip: 'Git' },
+  laravel: { logo: 'assets/laravel.png', tooltip: 'Laravel' },
+};
+
 // const durationPerExpertise = 1; // seconds
-const durationPerExpertise = 0.5; // seconds
+const durationPerExpertise = 0.3; // seconds
 
 const jobsConfig = [
-  /* {
+  {
     company: {
       name: 'AUGE Digital',
       color: 'green'
@@ -16,22 +32,47 @@ const jobsConfig = [
     profile: 'Junior Web Developer',
     skills: [
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
+        ...logoMap.angularjs,
         expertise: 7 // 1 - 10
       },
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
-        expertise: 2 // 1 - 10
+        ...logoMap.angular,
+        expertise: 6 // 1 - 10
       },
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
+        ...logoMap.rxjs,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.typescript,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.css,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.html,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.js,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.sass,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.git,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.laravel,
         expertise: 5 // 1 - 10
       }
     ]
-  }, */
+  },
   {
     company: {
       name: 'Universitas XXI',
@@ -42,58 +83,94 @@ const jobsConfig = [
     endDate: '11/2017',
     skills: [
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
+        ...logoMap.angular,
+        expertise: 7 // 1 - 10
+      },
+      {
+        ...logoMap.typescript,
         expertise: 6 // 1 - 10
       },
       {
-        code: 'angular-js',
-        logo: 'assets/typescript.png',
+        ...logoMap.rxjs,
         expertise: 6 // 1 - 10
       },
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
+        ...logoMap.css,
         expertise: 7 // 1 - 10
       },
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
-        expertise: 5 // 1 - 10
-      },
-      {
-        code: 'angular-js',
-        logo: 'assets/typescript.png',
+        ...logoMap.html,
         expertise: 7 // 1 - 10
       },
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
+        ...logoMap.js,
         expertise: 7 // 1 - 10
       },
       {
-        code: 'angular-js',
-        logo: 'assets/typescript.png',
-        expertise: 2 // 1 - 10
+        ...logoMap.sass,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.git,
+        expertise: 6 // 1 - 10
       }
     ]
   },
-  /* {
+  {
     company: {
       name: 'Profile Software Services',
       color: 'red'
     },
     profile: 'Senior Front-End Developer',
     initDate: '01/2016',
-    endDate: '',
+    endDate: 'Now',
     skills: [
       {
-        code: 'angular-js',
-        logo: 'assets/angular.svg',
-        expertise: 7 // 1 - 10
+        ...logoMap.angular,
+        expertise: 8 // 1 - 10
+      },
+      {
+        ...logoMap.typescript,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.rxjs,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.css,
+        expertise: 8 // 1 - 10
+      },
+      {
+        ...logoMap.html,
+        expertise: 8 // 1 - 10
+      },
+      {
+        ...logoMap.js,
+        expertise: 8 // 1 - 10
+      },
+      {
+        ...logoMap.react,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.redux,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.d3,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.sass,
+        expertise: 6 // 1 - 10
+      },
+      {
+        ...logoMap.git,
+        expertise: 6 // 1 - 10
       }
     ]
-  } */
+  }
 ];
 
 jobsConfig.forEach((job, i, array) => {
@@ -116,8 +193,6 @@ jobsConfig.forEach((job, i, array) => {
   })
 
 });
-
-console.log(jobsConfig);
 
 /* const scrollStep = 1;
 let currentScroll = 0;
@@ -159,9 +234,9 @@ jobs.forEach(job => {
   svg.appendChild(job);
 });
 // svg.appendChild(avatar);
-svg.appendChild(getContinue(jobsConfig, totalJobDuration));
+svg.appendChild(getContinue(jobsConfig, totalJobDuration, jobHeight));
 
-const start = document.getElementById('startCV');
+const start = document.getElementById('start-cv');
 const intro = document.getElementById('intro');
 
 start.addEventListener('click', function startFn(e) {

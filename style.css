@@ -56,7 +56,7 @@ body {
    z-index: 1;
 }
 
-#startCV { 
+#start-cv { 
    background-color: transparent;
    border: 4px solid white;
    border-radius: 0.7em;
@@ -68,8 +68,13 @@ body {
    outline: none;
 }
 
-#startCV:hover {
+#start-cv:hover {
    cursor: pointer;
+}
+
+.welcome-message {
+   font-size: 200%;
+   color: white;
 }
 
 #svg {

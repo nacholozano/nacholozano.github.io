@@ -103,19 +103,20 @@ export function avatarThatFollowPath(jobsConfig, jobDuration, currentJobPath, jo
   return g;
 }
 
-export function getContinue(jobsConfig, jobDuration) {
-  const jobHeight = 9.6;
-  const jobHeightUnit = 'em';
+export function getContinue(jobsConfig, jobDuration, jobHeight) {
+  // const jobHeight = 65;
+  const jobHeightUnit = 'px';
   const animationDelayOffset = 0.5;
+  const offset = 35;
   const lastJobIsCurrent = !jobsConfig[jobsConfig.length - 1].endDate;
-  const animationDelay = jobDuration * jobsConfig.length + animationDelayOffset;
+  const animationDelay = jobDuration /* * jobsConfig.length */ + animationDelayOffset;
 
   const willContinue = createSvgEl('text');
   willContinue.textContent = 'will continue ... with your project?';
   willContinue.style.fontSize = '0.5em';
   willContinue.style.animationDelay = `${lastJobIsCurrent ? (animationDelay - jobDuration / 2) : animationDelay}s`;
   willContinue.style.animationDuration = '4s';
-  willContinue.style.transform = `translate(5.1vw, ${(jobHeight * jobsConfig.length) + jobHeightUnit})`;
+  willContinue.style.transform = `translate(5.1vw, ${(jobHeight * jobsConfig.length) + offset + jobHeightUnit})`;
   willContinue.classList.add('opacity-full');
   return willContinue;
 }
@@ -180,10 +181,14 @@ function setJobSkillProps(translate = () => {}, isCurrentJob) {
   return (skill, i) => {
     const gLogo = createSvgEl('g');
     const logo = createSvgEl('image');
+    const title = createSvgEl('title');
+
     logo.setAttribute('href', skill.logo);
     logo.setAttribute('width', 1);
     logo.setAttribute('height', 1);
     logo.classList.add('scale-skill');
+
+    title.textContent = skill.tooltip;
     
     logo.style.animationName = `scale-skill-${skill.expertise}`;
     
@@ -193,6 +198,7 @@ function setJobSkillProps(translate = () => {}, isCurrentJob) {
     const trans = translate(i);
     gLogo.style.transform = `translate(${trans.x}, ${trans.y})`;
 
+    logo.appendChild(title);
     gLogo.appendChild(logo);
     // gContainer.appendChild(gLogo);
     return gLogo;
