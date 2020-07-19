@@ -15,6 +15,13 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
 
     const g = createSvgEl('g')
     const p = createSvgEl('path');
+    const background = createSvgEl('rect');
+
+    background.setAttribute('width', '100%');
+    background.setAttribute('height', jobHeight);
+    background.style.fill = jobConfig.company.color;
+    background.style.opacity = 0.2;
+
     p.setAttribute('d', `
       M 35 
       ${initHeight}
@@ -49,7 +56,8 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     jobInfo.appendChild(initDate);
     jobInfo.appendChild(company);
     jobInfo.appendChild(endDate);
-
+      
+    g.appendChild(background);
     g.appendChild(jobInfo);
     g.appendChild(p);
     g.style.transform = `translateY(${translateY * i}${unitTranslateY})`;
