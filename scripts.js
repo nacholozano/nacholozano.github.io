@@ -19,13 +19,13 @@ const logoMap = {
 };
 
 // const durationPerExpertise = 1; // seconds
-const durationPerExpertise = 0.3; // seconds
+const durationPerExpertise = 0.25; // seconds
 
 const jobsConfig = [
   {
     company: {
       name: 'AUGE Digital',
-      color: 'green'
+      color: '0, 158, 8'
     },
     initDate: '01/2016',
     endDate: '11/2017',
@@ -76,7 +76,7 @@ const jobsConfig = [
   {
     company: {
       name: 'Universitas XXI',
-      color: 'blue'
+      color: '0, 21, 158'
     },
     profile: 'Mid Front-End Developer',
     initDate: '01/2016',
@@ -119,7 +119,7 @@ const jobsConfig = [
   {
     company: {
       name: 'Profile Software Services',
-      color: 'red'
+      color: '158, 0, 0'
     },
     profile: 'Senior Front-End Developer',
     initDate: '01/2016',

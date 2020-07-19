@@ -19,8 +19,11 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
 
     background.setAttribute('width', '100%');
     background.setAttribute('height', jobHeight);
-    background.style.fill = jobConfig.company.color;
-    background.style.opacity = 0.2;
+    background.style.fill = `rgb(${jobConfig.company.color}, 0.2)`;
+
+    background.style.animationDuration = '0.5s';
+    background.style.animationDelay = jobConfig.animationDelay + 's';
+    background.classList.add('opacity-full');
 
     p.setAttribute('d', `
       M 35 
@@ -29,10 +32,9 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
           ? currentJobPath 
           : jobPath}
     `)
-      
-    p.style.stroke = jobConfig.company.color;
+    
+    p.style.stroke = `rgb(${jobConfig.company.color})`;
     p.style.animationDuration = `${jobConfig.duration}s`;
-
     p.style.animationDelay = (jobConfig.animationDelay) + 's';
 
     const jobInfo = createSvgEl('text');
@@ -61,8 +63,7 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     g.appendChild(jobInfo);
     g.appendChild(p);
     g.style.transform = `translateY(${translateY * i}${unitTranslateY})`;
-
-    /* const skills = getJobSkills(jobConfig.skills, jobDuration); */
+    
     const skills = getJobSkills(jobConfig, jobDuration);
     
     g.appendChild(skills);
