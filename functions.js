@@ -121,11 +121,11 @@ export function getContinue(jobsConfig, jobDuration, jobHeight) {
   const animationDelay = jobDuration /* * jobsConfig.length */ + animationDelayOffset;
 
   const willContinue = createSvgEl('text');
-  willContinue.textContent = 'will continue ... with your project?';
+  willContinue.textContent = 'Will my career continue with your project?';
   willContinue.style.fontSize = '0.5em';
   willContinue.style.animationDelay = `${lastJobIsCurrent ? (animationDelay - jobDuration / 2) : animationDelay}s`;
   willContinue.style.animationDuration = '4s';
-  willContinue.style.transform = `translate(5.1vw, ${(jobHeight * jobsConfig.length) + offset + jobHeightUnit})`;
+  willContinue.style.transform = `translate(4.1vw, ${(jobHeight * jobsConfig.length) + offset + jobHeightUnit})`;
   willContinue.classList.add('opacity-full');
   return willContinue;
 }

@@ -16,6 +16,7 @@ const logoMap = {
   d3: { logo: 'assets/d3.png', tooltip: 'D3' },
   git: { logo: 'assets/git.png', tooltip: 'Git' },
   laravel: { logo: 'assets/laravel.png', tooltip: 'Laravel' },
+  adapt: { logo: 'assets/adapt.png', tooltip: 'Adapt Framework' },
 };
 
 // const durationPerExpertise = 1; // seconds
@@ -33,43 +34,47 @@ const jobsConfig = [
     skills: [
       {
         ...logoMap.angularjs,
-        expertise: 7 // 1 - 10
+        expertise: 4 // 1 - 10
       },
       {
         ...logoMap.angular,
-        expertise: 6 // 1 - 10
+        expertise: 2 // 1 - 10
       },
       {
         ...logoMap.rxjs,
-        expertise: 6 // 1 - 10
+        expertise: 2 // 1 - 10
       },
       {
         ...logoMap.typescript,
-        expertise: 6 // 1 - 10
+        expertise: 2 // 1 - 10
+      },
+      {
+        ...logoMap.adapt,
+        expertise: 4 // 1 - 10
       },
       {
         ...logoMap.css,
-        expertise: 6 // 1 - 10
+        expertise: 3 // 1 - 10
       },
       {
         ...logoMap.html,
-        expertise: 6 // 1 - 10
+        expertise: 3 // 1 - 10
       },
       {
         ...logoMap.js,
-        expertise: 6 // 1 - 10
+        expertise: 4 // 1 - 10
       },
       {
         ...logoMap.sass,
-        expertise: 6 // 1 - 10
+        expertise: 3 // 1 - 10
       },
       {
         ...logoMap.git,
-        expertise: 6 // 1 - 10
+        expertise: 3 // 1 - 10
       },
       {
         ...logoMap.laravel,
-        expertise: 5 // 1 - 10
+        expertise: 4 // 1 - 10
       }
     ]
   },
@@ -84,35 +89,35 @@ const jobsConfig = [
     skills: [
       {
         ...logoMap.angular,
-        expertise: 7 // 1 - 10
+        expertise: 5 // 1 - 10
       },
       {
         ...logoMap.typescript,
-        expertise: 6 // 1 - 10
+        expertise: 4 // 1 - 10
       },
       {
-        ...logoMap.rxjs,
+        ...logoMap.js,
         expertise: 6 // 1 - 10
       },
       {
         ...logoMap.css,
-        expertise: 7 // 1 - 10
+        expertise: 5 // 1 - 10
       },
       {
         ...logoMap.html,
-        expertise: 7 // 1 - 10
+        expertise: 5 // 1 - 10
       },
       {
-        ...logoMap.js,
-        expertise: 7 // 1 - 10
+        ...logoMap.rxjs,
+        expertise: 4 // 1 - 10
       },
       {
         ...logoMap.sass,
-        expertise: 6 // 1 - 10
+        expertise: 5 // 1 - 10
       },
       {
         ...logoMap.git,
-        expertise: 6 // 1 - 10
+        expertise: 5 // 1 - 10
       }
     ]
   },
@@ -151,15 +156,15 @@ const jobsConfig = [
       },
       {
         ...logoMap.react,
-        expertise: 6 // 1 - 10
+        expertise: 3 // 1 - 10
       },
       {
         ...logoMap.redux,
-        expertise: 6 // 1 - 10
+        expertise: 3 // 1 - 10
       },
       {
         ...logoMap.d3,
-        expertise: 6 // 1 - 10
+        expertise: 3 // 1 - 10
       },
       {
         ...logoMap.sass,
@@ -167,7 +172,7 @@ const jobsConfig = [
       },
       {
         ...logoMap.git,
-        expertise: 6 // 1 - 10
+        expertise: 7 // 1 - 10
       }
     ]
   }
@@ -188,6 +193,9 @@ jobsConfig.forEach((job, i, array) => {
   /* const jobDelay = i ? array[i - 1].duration : 0; */
 
   job.skills.forEach((skill, iSkills, arraySkills) => {
+
+
+
     skill.duration = skill.expertise * durationPerExpertise;
     skill.animationDelay = (iSkills ? 0 : job.animationDelay) + (iSkills ? (arraySkills[iSkills - 1].duration + arraySkills[iSkills - 1].animationDelay ) : 0);
   })
