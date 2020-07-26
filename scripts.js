@@ -20,7 +20,7 @@ const logoMap = {
 };
 
 // const durationPerExpertise = 1; // seconds
-const durationPerExpertise = 0.25; // seconds
+const durationPerExpertise = 0.3; // seconds
 
 const jobsConfig = [
   {
@@ -215,10 +215,6 @@ jobsConfig.forEach((job, iJobs, arrayJobs) => {
 
 });
 
-/* const scrollStep = 1;
-let currentScroll = 0;
-let maxScroll = 0; */
-
 const initHeight = 0;
 const jobHeight = 65;
 const jobDuration = 5;
@@ -244,7 +240,6 @@ const jobPath = `
 /* window.scrollTo(0, 0); */
 
 const id = document.getElementById('svg');
-
 const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svg.setAttribute('viewBox', `0 0 300 ${(jobHeight * jobsConfig.length) + 70}`);
 
@@ -267,15 +262,29 @@ start.addEventListener('click', function startFn(e) {
   id.appendChild(svg);
 });
 
+// const svg = document.querySelector('div');
+
+// get scroll position in px
+// console.log(el.scrollLeft, el.scrollTop);
+
+// set scroll position in px
+// el.scrollLeft = 500;
+// el.scrollTop = 1000;
+
+const scrollStep = 1;
+let currentScroll = 0;
+let maxScroll = 0;
+
 /* setTimeout(() => {
   maxScroll = document.body.scrollHeight;
-  // window.requestAnimationFrame(step);
-}, jobDuration * 1000) */
+  window.requestAnimationFrame(step);
+}, jobDuration * 2000)
 
-/* function step() {
+function step() {
   currentScroll += scrollStep;
-  window.scrollTo(0, currentScroll);
+  id.scrollTop = currentScroll;
   if (currentScroll < maxScroll) {
     window.requestAnimationFrame(step);
   }
-} */
+}
+ */

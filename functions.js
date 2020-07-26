@@ -132,7 +132,7 @@ export function getContinue(jobsConfig, jobDuration, jobHeight) {
   willContinue.style.fontSize = '0.5em';
   willContinue.style.animationDelay = `${lastJobIsCurrent ? (animationDelay - jobDuration / 2) : animationDelay}s`;
   willContinue.style.animationDuration = '3s';
-  willContinue.style.transform = `translate(4.1vw, ${(jobHeight * jobsConfig.length) + offset + jobHeightUnit})`;
+  willContinue.style.transform = `translate(27%, ${(jobHeight * jobsConfig.length) + offset + jobHeightUnit})`;
   willContinue.classList.add('opacity-full');
   return willContinue;
 }
