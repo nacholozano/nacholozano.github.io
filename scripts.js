@@ -178,11 +178,30 @@ const jobsConfig = [
   }
 ];
 
-jobsConfig.forEach((job, i, array) => {
-  job.duration = durationPerExpertise * (job.skills.map(skill => skill.expertise).reduce((ac, currentValue) => ac + currentValue));
+jobsConfig.forEach((job, iJobs, arrayJobs) => {
 
-  const slicedArray = array
-    .slice(0, i);
+  job.skills.forEach((skill) => {
+
+    const previousJobIndex = iJobs - 1;
+    if (previousJobIndex > -1) {
+      const repeatedSkill = arrayJobs[previousJobIndex].skills.find(s => s.logo === skill.logo);
+      if (repeatedSkill) {
+        skill.initExpertise = repeatedSkill.expertise;
+      }
+    }
+
+    const increaseDurationByInitExpertises = skill.initExpertise ? 1 : 0;
+    const expertiseDiff = skill.initExpertise ? (skill.expertise - skill.initExpertise) : skill.expertise;
+
+    skill.duration = ( expertiseDiff * durationPerExpertise ) + increaseDurationByInitExpertises;
+  });
+
+  job.duration = job.skills
+      .map(skill => skill.duration) 
+      .reduce((ac, currentValue) => ac + currentValue);
+
+  const slicedArray = arrayJobs
+    .slice(0, iJobs);
 
   job.animationDelay = slicedArray.length 
     ? slicedArray
@@ -190,13 +209,7 @@ jobsConfig.forEach((job, i, array) => {
       .reduce((ac, currentValue) => ac + currentValue)
     : 0;
 
-  /* const jobDelay = i ? array[i - 1].duration : 0; */
-
   job.skills.forEach((skill, iSkills, arraySkills) => {
-
-
-
-    skill.duration = skill.expertise * durationPerExpertise;
     skill.animationDelay = (iSkills ? 0 : job.animationDelay) + (iSkills ? (arraySkills[iSkills - 1].duration + arraySkills[iSkills - 1].animationDelay ) : 0);
   })
 

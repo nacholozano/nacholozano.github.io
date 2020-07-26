@@ -13,10 +13,12 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
 
   return jobsConfig.map((jobConfig, i) => {
 
+    // Create elements
     const g = createSvgEl('g')
     const p = createSvgEl('path');
     const background = createSvgEl('rect');
 
+    // Job background
     background.setAttribute('width', '100%');
     background.setAttribute('height', jobHeight);
     background.style.fill = `rgb(${jobConfig.company.color}, 0.2)`;
@@ -25,6 +27,7 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     background.style.animationDelay = jobConfig.animationDelay + 's';
     background.classList.add('opacity-full');
 
+    // Path
     p.setAttribute('d', `
       M 35 
       ${initHeight}
@@ -37,23 +40,27 @@ export function buildJobs(jobsConfig, jobDuration, currentJobPath, jobPath, jobH
     p.style.animationDuration = `${jobConfig.duration}s`;
     p.style.animationDelay = (jobConfig.animationDelay) + 's';
 
-    const jobInfo = createSvgEl('text');
-    jobInfo.classList.add('jobInfo');
-
+    // Ini date
     const initDate = createSvgEl('tspan');
     initDate.textContent = jobConfig.initDate;
     initDate.setAttribute('dy', "1.2em");
     initDate.setAttribute('x', "0.2em");
 
+    // Company
     const company = createSvgEl('tspan');
     company.textContent = jobConfig.company.name;
     company.setAttribute('dy', "1.2em");
     company.setAttribute('x', "0.2em");
 
+    // End date
     const endDate = createSvgEl('tspan');
     endDate.textContent = jobConfig.endDate || 'Now';
     endDate.setAttribute('dy', "1.2em");
     endDate.setAttribute('x', "0.2em");
+
+    // Job info
+    const jobInfo = createSvgEl('text');
+    jobInfo.classList.add('jobInfo');
 
     jobInfo.appendChild(initDate);
     jobInfo.appendChild(company);
@@ -124,7 +131,7 @@ export function getContinue(jobsConfig, jobDuration, jobHeight) {
   willContinue.textContent = 'Will my career continue with your project?';
   willContinue.style.fontSize = '0.5em';
   willContinue.style.animationDelay = `${lastJobIsCurrent ? (animationDelay - jobDuration / 2) : animationDelay}s`;
-  willContinue.style.animationDuration = '4s';
+  willContinue.style.animationDuration = '3s';
   willContinue.style.transform = `translate(4.1vw, ${(jobHeight * jobsConfig.length) + offset + jobHeightUnit})`;
   willContinue.classList.add('opacity-full');
   return willContinue;
@@ -197,12 +204,31 @@ function setJobSkillProps(translate = () => {}, isCurrentJob) {
     logo.setAttribute('height', 1);
     logo.classList.add('scale-skill');
 
+    if (skill.initExpertise) {
+      logo.classList.add(`scale-skill-initial-${skill.initExpertise}`);
+      logo.classList.add('scale-skill-no-opacity');
+    } else {
+      logo.classList.add(`scale-skill-initial-0`);
+    }
+
     title.textContent = skill.tooltip;
     
-    logo.style.animationName = `scale-skill-${skill.expertise}`;
-    
-    logo.style.animationDuration = (isCurrentJob ? (skill.duration / 2) : skill.duration) + 's';
-    logo.style.animationDelay = skill.animationDelay + 's';
+    const animationFillMode = 'forwards';
+    const opactityDuraction = skill.initExpertise ? 1 : 0;
+
+    const scaleAnimationClass = `scale-skill-${skill.expertise}`;
+    const scaleAnimationDuration = (isCurrentJob ? (skill.duration / 2) : skill.duration) + 's';
+    const scaleAnimationDelay = skill.animationDelay + opactityDuraction + 's';
+    const scaleAnimation = `${scaleAnimationDuration} ${scaleAnimationDelay} ${animationFillMode} ${scaleAnimationClass}`;
+
+    const opacityAnimationClass = 'opacityFull';
+    const opacityAnimationDuration = opactityDuraction + 's';
+    const opacityAnimationDelay = skill.animationDelay + 's';
+    const opacityAnimation = `${opacityAnimationDuration} ${opacityAnimationDelay} ${animationFillMode} ${opacityAnimationClass}`;
+
+    logo.style.animation = skill.initExpertise 
+      ? `${opacityAnimation}, ${scaleAnimation}`
+      : scaleAnimation;
 
     const trans = translate(i);
     gLogo.style.transform = `translate(${trans.x}, ${trans.y})`;

@@ -154,13 +154,46 @@ path {
 }
 
 .scale-skill {
-   transform: scale(0);
-   animation-fill-mode: forwards;
-   animation-timing-function: linear;
-   transition-duration: 4s;
-   transition-delay: 2s;
    transform-Box: fill-box;
    transform-origin: center;
+}
+
+.scale-skill-no-opacity {
+   opacity: 0;
+}
+
+.scale-skill-initial-0 {
+   transform: scale(0);
+}
+.scale-skill-initial-1 {
+   transform: scale(5);
+}
+.scale-skill-initial-2 {
+   transform: scale(10);
+}
+.scale-skill-initial-3 {
+   transform: scale(15);
+}
+.scale-skill-initial-4 {
+   transform: scale(20);
+}
+.scale-skill-initial-5 {
+   transform: scale(25);
+}
+.scale-skill-initial-6 {
+   transform: scale(30);
+}
+.scale-skill-initial-7 {
+   transform: scale(35);
+}
+.scale-skill-initial-8 {
+   transform: scale(40);
+}
+.scale-skill-initial-9 {
+   transform: scale(45);
+}
+.scale-skill-initial-10 {
+   transform: scale(50);
 }
 
 /* Skill expertise animations */
